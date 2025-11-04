@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
+// import Shop from '../page/Shop'; 
 import logo from "../assets/logo.png"
 
 function Navbar() {
@@ -35,7 +36,7 @@ function Navbar() {
           {/* Main Nav Links (Centered) */}
           <ul className="navbar-nav mx-auto">
             <li className="nav-item">
-              <Link className="nav-link active" to="/" aria-current="page">
+              <Link className="nav-link" to="/" aria-current="page">
                 Home
               </Link>
             </li>
@@ -77,7 +78,8 @@ function Navbar() {
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/wishlist">
-              <i className="bi bi-heart"></i> Wishlist
+              <i className="bi bi-heart"></i> Wishlist 
+              {/* <span className="badge bg-secondary">Wishlist: {wishlist.length}</span> */}
             </Link>
           </li>
           <li className="nav-item">

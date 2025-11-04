@@ -1,4 +1,32 @@
 
+const sliderDesc = [
+    {
+        title:"Impossible is Nothing",
+        desc: "It represented pushing boundaries and striving for the impossible in sports and life.",
+        image: "https://cdn.runrepeat.com/storage/gallery/product_content/39602/adidas-campus-00-s-forefoot-stack-2-21229473-main.jpg",
+        subImage: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg",
+        altImage: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg",
+        altSubImage: "shoes",
+    },
+    {
+        title:"Impossible is Nothing",
+        desc: "It represented pushing boundaries and striving for the impossible in sports and life.",
+        image: "https://cdn.runrepeat.com/storage/gallery/product_content/39602/adidas-campus-00-s-forefoot-stack-2-21229473-main.jpg",
+        subImage: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg",
+        altImage: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg",
+        altSubImage: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg",
+    },
+    {
+        title:"Impossible is Nothing",
+        desc: "It represented pushing boundaries and striving for the impossible in sports and life.",
+        image: "https://cdn.runrepeat.com/storage/gallery/product_content/39602/adidas-campus-00-s-forefoot-stack-2-21229473-main.jpg",
+        subImage: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg",
+        altImage: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg",
+        altSubImage: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg",
+    }
+]
+
+
 function Slider() {
     return (
         <>
@@ -13,65 +41,27 @@ function Slider() {
                                     <li data-bs-target="#slider-carousel" data-bs-slide-to="2"></li>
                                 </ol>
                                 <div className="carousel-inner">
-                                    <div className="carousel-item active">
+                                    {sliderDesc.map((sliderDesc) =>(
+                                         <div className="carousel-item active">
                                         <div className="row">
                                             <div className="col-sm-6 d-flex align-items-center" data-aos="fade-right">
                                                 <div>
                                                     <h1><span>You Got This</span></h1>
-                                                    <h2>Impossible is Nothing</h2>
-                                                    <p>It represented pushing boundaries and striving for the impossible in
-                                                        sports and life.</p>
-                                                    <button type="button" className="btn btn-primary get mb-3"
-                                                        aria-label="Get it now">Get it now</button>
+                                                    <h2>{sliderDesc.title}</h2>
+                                                    <p>{sliderDesc.desc}</p>
+                                                    <a type="button" className="btn btn-primary get mb-3"
+                                                        aria-label="Get it now">Get it now</a>
                                                 </div>
                                             </div>
                                             <div className="col-sm-6" data-aos="fade-left">
-                                                <img src="./images/home/slider1.png" className="girl img-fluid"
-                                                    alt="Fashion Model 1" loading="lazy" />
-                                                <img src="./images/home/logo-image.png" className="pricing" alt="Pricing Badge"
+                                                <img src={sliderDesc.image} className="girl img-fluid"
+                                                    alt={sliderDesc.altImage} loading="lazy" />
+                                                <img src={sliderDesc.subImage} className="pricing" alt={sliderDesc.altSubImage}
                                                     loading="lazy" />
-                                            </div>
+                                            </div>      
                                         </div>
-                                    </div>
-                                    <div className="carousel-item">
-                                        <div className="row">
-                                            <div className="col-sm-6 d-flex align-items-center" data-aos="fade-right">
-                                                <div>
-                                                    <h1><span>Just do it</span></h1>
-                                                    <h2>Greatness is earned, never awarded</h2>
-                                                    <p>The harder you push, the more you are pulled. Take the high road and
-                                                        go higher. Giving up is simply not an option</p>
-                                                    <button type="button" className="btn btn-primary get mb-3"
-                                                        aria-label="Get it now">Get it now</button>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-6" data-aos="fade-left">
-                                                <img src="./images/home/slider2.png" className="girl img-fluid"
-                                                    alt="Fashion Model 2" loading="lazy" />
-                                                <img src="./images/home/logo-image2.png" className="pricing" alt="Pricing Badge"
-                                                    loading="lazy" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="carousel-item">
-                                        <div className="row">
-                                            <div className="col-sm-6 d-flex align-items-center" data-aos="fade-right">
-                                                <div>
-                                                    <h1><span>O</span>ur Turn</h1>
-                                                    <h2>It signifies a time for action and empowerment, encouraging
-                                                        individuals to make their mark on the world.</h2>
-                                                    <button type="button" className="btn btn-primary get mb-3"
-                                                        aria-label="Get it now">Get it now</button>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-6" data-aos="fade-left">
-                                                <img src="./images/home/slider3.png" className="girl img-fluid"
-                                                    alt="Fashion Model 3" loading="lazy" />
-                                                <img src="./images/home/logo-image3.png" className="pricing" alt="Pricing Badge"
-                                                    loading="lazy" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div> 
+                                    ))}
                                 </div>
                                 <a href="#slider-carousel" className="carousel-control-prev" data-bs-slide="prev"
                                     aria-label="Previous slide">
@@ -88,6 +78,7 @@ function Slider() {
                     </div>
                 </div>
             </section>
+            
         </>
     )
 }
