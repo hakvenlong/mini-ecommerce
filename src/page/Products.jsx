@@ -38,11 +38,6 @@ function Products() {
     <div className="container py-5">
       <h1 className="text-center mb-4 fw-bold">Shop</h1>
 
-      {/* Optional counts */}
-      <div className="text-center mb-4">
-        {/* <span className="badge bg-primary me-3">Cart: {cart.length}</span> */}
-      </div>
-
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         {products.map((product) => (
           <div key={product.id} className="col">
@@ -69,7 +64,7 @@ function Products() {
                   >
                     Add to Cart
                   </button>
-                  <Link to='productdetail' className="btn btn-outline-secondary flex-fill" >
+                  <Link to={`/productdetail/${product.id}`} className="btn btn-outline-secondary flex-fill">
                     More Detail
                   </Link>
                 </div>
