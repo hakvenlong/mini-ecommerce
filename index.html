@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SMOS - Store | Home</title>
+
+    <!-- ==== Bootstrap ==== -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <!-- ==== Bootstrap Icons ==== -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <!-- ==== Google Fonts ==== -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ==== Swiper ==== -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <!-- ==== AOS ==== -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- ==== Font Awesome ==== -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- ==== Custom CSS ==== -->
+    <link href="./src/assets/css/animate.css" rel="stylesheet" />
+    <link href="./src/assets/css/main.css" rel="stylesheet" />
+    <link href="./src/assets/css/responsive.css" rel="stylesheet" />
+
+    <!-- ==== Favicon ==== -->
+    <link rel="shortcut icon" href="src/assets/logo.png" />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="144x144"
+      href="./images/ico/apple-touch-icon-144-precomposed.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="114x114"
+      href="./images/ico/apple-touch-icon-114-precomposed.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="72x72"
+      href="./images/ico/apple-touch-icon-72-precomposed.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      href="./images/ico/apple-touch-icon-57-precomposed.png"
+    />
+  </head>
+
+  <body>
+    <!-- React root -->
+    <div id="root"></div>
+
+    <!-- ==== Vite/React entry ==== -->
+    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- ==== Bootstrap JS (bundle includes Popper) ==== -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- ==== Swiper ==== -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- ==== AOS ==== -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- ==== jQuery (only if you still need it) ==== -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- ==== Your custom scripts (uncomment when ready) ==== -->
+    
+    <script src="./src/assets/js/jquery.scrollUp.min.js"></script>
+    <script src="./src/assets/js/main.js"></script>
+    <!-- <script src="./src/assets/js/cart.js"></script>
+    <script src="./src/assets/js/checkout.js"></script>
+    <script src="./src/assets/js/wishlist.js"></script> -->
+   
+
+    <!-- ==== Initialise libraries ==== -->
+    <script>
+      // Swiper (example – adjust selectors to your sliders)
+      document.addEventListener('DOMContentLoaded', () => {
+        new Swiper('.swiper', {
+          loop: true,
+          autoplay: { delay: 5000 },
+          pagination: { el: '.swiper-pagination', clickable: true },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      });
+
+      // AOS
+      AOS.init({
+        duration: 800,
+        once: true,
+      });
+    </script>
+  </body>
+</html>
