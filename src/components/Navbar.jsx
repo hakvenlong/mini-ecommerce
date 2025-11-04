@@ -77,12 +77,6 @@ function Navbar() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/wishlist">
-              <i className="bi bi-heart"></i> Wishlist 
-              {/* <span className="badge bg-secondary">Wishlist: {wishlist.length}</span> */}
-            </Link>
-          </li>
-          <li className="nav-item">
             <Link className="nav-link" to="/checkout">
               <i className="bi bi-bag-check"></i> Checkout
             </Link>

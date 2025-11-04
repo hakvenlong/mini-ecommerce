@@ -8,9 +8,10 @@ import Contact from "./page/Contact"
 import Shop from "./page/Shop"
 import Cart from './page/Cart';
 import Account from './page/Acc';
-import Wishlist from './page/Wishlist';
 import Checkout from './page/Checkout';
 import LoginAcc from './page/LoginAcc';
+import Error from './page/Error';
+import ProductDetail from './page/ProductDetail';
 
 
 function App() {
@@ -24,9 +25,10 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/account" element={<Account />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/login" element={<LoginAcc />} />
+        <Route path="/productdetail" element={<ProductDetail />} />
+        <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
     </Router>

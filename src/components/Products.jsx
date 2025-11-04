@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
-import useFetchData from '../hook/useFetchData'; 
+import useFetchData from '../hook/useFetchData';
+import { Link } from 'react-router-dom';
 
 import "../App.css";   // keep your custom styles if any
 
 function Products() {
   // ---------- Cart & Wishlist ----------
   const [cart, setCart] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
 
   const addToCart = (product) => {
     setCart((prev) => [...prev, product]);
     alert(`${product.title} added to cart!`);
-  };
-
-  const addToWishlist = (product) => {
-    setWishlist((prev) => [...prev, product]);
-    alert(`${product.title} added to wishlist!`);
   };
 
   // ---------- Data ----------
@@ -45,8 +40,7 @@ function Products() {
 
       {/* Optional counts */}
       <div className="text-center mb-4">
-        <span className="badge bg-primary me-3">Cart: {cart.length}</span>
-        {/* <span className="badge bg-secondary">Wishlist: {wishlist.length}</span> */}
+        {/* <span className="badge bg-primary me-3">Cart: {cart.length}</span> */}
       </div>
 
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
@@ -64,6 +58,9 @@ function Products() {
                 <p className="card-text text-success fw-bold mb-3">
                   ${product.price}
                 </p>
+                <p>
+                  rating {product.rating.rate} | instock {product.rating.count}
+                </p>
 
                 <div className="mt-auto d-flex gap-2">
                   <button
@@ -72,12 +69,9 @@ function Products() {
                   >
                     Add to Cart
                   </button>
-                  <button
-                    onClick={() => addToWishlist(product)}
-                    className="btn btn-outline-secondary flex-fill"
-                  >
-                    Wishlist
-                  </button>
+                  <Link to='productdetail' className="btn btn-outline-secondary flex-fill" >
+                    More Detail
+                  </Link>
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 
 
-function Aside (){
+function SideBar (){
     return(
         <>
             <div>
@@ -10,4 +10,4 @@ function Aside (){
     )
 }
 
-export default Aside
+export default SideBar
