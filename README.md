@@ -1,28 +1,85 @@
-🛍️ Mini E-Commerce (ReactJS)
+# React E-Commerce Store
 
-A simple e-commerce web app built with ReactJS that lets users browse products, add items to cart, and manage their shopping experience in real time. This project was created to practice modern React concepts like components, props, state management, and React Router for navigation.
+A modern, responsive **React shopping cart** application built with:
 
-Features
+- **React 18** + **React Router**
+- **use-cart** – lightweight cart state management
+- **Fake Store API** – product data
+- **Bootstrap 5** – styling & responsiveness
+- **React Bootstrap** – toast notifications
+- **Custom hooks** – data fetching
 
-Product listing and details page
+---
 
-Add/remove items from cart
+## Features
 
-Dynamic cart total updates
+- Browse products with images, price, and ratings
+- Add to cart with **toast notification**
+- View cart with **quantity controls**
+- Checkout page with:
+  - Shipping form
+  - Payment method selection (Cash on Delivery, KHQR/ABA)
+  - Order summary with subtotal, shipping, total
+- Fully responsive on mobile & desktop
 
-Responsive design using Bootstrap
+---
 
-Clean and reusable component structure
+## Live Demo
 
-Tech Stack
+[https://your-deploy-url.com](https://your-deploy-url.com) *(replace with actual link)*
 
-ReactJS
+---
 
-Bootstrap
+## Tech Stack
 
-CSS
+| Technology        | Purpose                          |
+|-------------------|----------------------------------|
+| React             | UI framework                     |
+| React Router      | Page navigation                  |
+| `use-cart`        | Cart state management            |
+| Bootstrap 5       | Responsive design & components   |
+| React Bootstrap   | Toast notifications              |
+| Fake Store API    | Mock product data                |
 
-Git & GitHub for version control
+---
 
-Goal
-To demonstrate practical React skills by building a functional and responsive e-commerce interface — similar to a real-world project.
+## Project Structure
+src/
+├── components/
+│   └── CartLineItem.jsx
+├── pages/
+│   ├── Products.jsx
+│   ├── Cart.jsx
+│   └── Checkout.jsx
+├── hook/
+│   └── useFetchData.js
+├── context/
+│   └── CartContext.jsx   (optional – if not using use-cart)
+├── App.jsx
+├── index.jsx
+└── README.md
+text
+
+
+---
+
+## Getting Started
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/yourusername/react-ecommerce.git
+cd react-ecommerce
+
+npm install
+
+npm install react-router-dom bootstrap react-bootstrap use-cart
+
+npm start
+
+License
+MIT © [Hak Venlong]
+
+Support
+Found a bug? Want a feature?
+Open an issue
