@@ -1,6 +1,6 @@
-// src/pages/Cart.jsx
 import React from "react";
 import { useCart } from "use-cart";
+import {Link} from "react-router-dom"
 import useFetchData from "../hook/useFetchData";
 
 const CartLineItem = ({ item, product }) => {
@@ -8,6 +8,7 @@ const CartLineItem = ({ item, product }) => {
 
   return (
     <div className="d-flex align-items-center justify-content-between p-2 border rounded mb-2">
+      <img style={{width:'50px'}} src={product.image} alt="" />
       <div>
         <strong>{product.title}</strong> ${product.price}
       </div>
@@ -32,7 +33,6 @@ export default function Cart() {
   const { items, clearCart, lineItemsCount } = useCart();
   const { products } = useFetchData("https://fakestoreapi.com/products");
 
-  // Map cart items → full product objects
   const cartWithProducts = items
     .map((cartItem) => {
       const product = products.find((p) => p.id === Number(cartItem.sku));
@@ -64,9 +64,9 @@ export default function Cart() {
 
             <div>
               <strong>Total: ${total}</strong>
-              <button className="btn btn-primary ms-3" onClick={() => console.log(items)}>
+              <Link to="/checkout" className="btn btn-primary ms-3">
                 Checkout
-              </button>
+              </Link>
             </div>
           </div>
         </>

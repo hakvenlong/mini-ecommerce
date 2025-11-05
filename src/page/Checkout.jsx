@@ -1,107 +1,230 @@
+import React from "react";
+import { useCart } from "use-cart";
+import { Link } from "react-router-dom";
+import useFetchData from "../hook/useFetchData";
 
-function Checkout() {
-    return (
-        <>
+const CartLineItem = ({ item, product }) => {
+  const { addItem, removeItem } = useCart();
 
-            <main className="container my-5">
-                <h2 className="mb-4">Checkout</h2>
-                <div id="empty-cart-message" className="alert alert-info text-center" style={{}}>
-                    Your cart is empty. <a href="./shop.html">Continue shopping</a>.
-                </div>
-                <div className="row" id="checkout-content">
-                     {/* Shipping Information  */}
-                    <div className="col-lg-8">
-                        <div className="card mb-4">
-                            <div className="card-body">
-                                <h4 className="card-title">Shipping Information</h4>
-                                <form id="shipping-form">
-                                    <div className="mb-3">
-                                        <label for="fullName" className="form-label">Full Name</label>
-                                        <input type="text" className="form-control" id="fullName" required/>
-                                    </div>
-                                    <div className="mb-3">
-                                        <label for="address" className="form-label">Address</label>
-                                        <input type="text" className="form-control" id="address" required/>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-6 mb-3">
-                                            <label for="city" className="form-label">City</label>
-                                            <input type="text" className="form-control" id="city" required/>
-                                        </div>
-                                        <div className="col-md-6 mb-3">
-                                            <label for="zipCode" className="form-label">Zip Code</label>
-                                            <input type="text" className="form-control" id="zipCode" pattern="[0-9]{5}" title="Zip Code must be 5 digits" required/>
-                                        </div>
-                                    </div>
-                                    <div className="mb-3">
-                                        <label for="country" className="form-label">Country</label>
-                                        <select className="form-select" id="country" required>
-                                            <option value="">Select a country</option>
-                                            <option value="US">United States</option>
-                                            <option value="CA">Canada</option>
-                                            <option value="UK">United Kingdom</option>
-                                            {/* Add more countries as needed  */}
-                                        </select>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        {/* Payment Information  */}
-                        <div className="card mb-4">
-                            <div className="card-body">
-                                <h4 className="card-title">Payment Information</h4>
-                                <form id="payment-form">
-                                    <div className="mb-3">
-                                        <label for="cardNumber" className="form-label">Card Number</label>
-                                        <input type="text" className="form-control" id="cardNumber" pattern="[0-9]{16}" placeholder="1234 5678 9012 3456" title="Card number must be 16 digits" required/>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-6 mb-3">
-                                            <label for="expiryDate" className="form-label">Expiry Date</label>
-                                            <input type="text" className="form-control" id="expiryDate" pattern="(0[1-9]|1[0-2])\/[0-9]{2}" placeholder="MM/YY" title="Enter expiry date in MM/YY format" required/>
-                                        </div>
-                                        <div className="col-md-6 mb-3">
-                                            <label for="cvv" className="form-label">CVV</label>
-                                            <input type="text" className="form-control" id="cvv" pattern="[0-9]{3}" placeholder="123" title="CVV must be 3 digits" required/>
-                                        </div>
-                                    </div>
-                                    <div className="mb-3">
-                                        <label for="cardName" className="form-label">Name on Card</label>
-                                        <input type="text" className="form-control" id="cardName" required/>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+  return (
+    <div className="d-flex align-items-center justify-content-between p-3 border rounded mb-2 bg-light">
+      <img
+        src={product.image}
+        alt={product.title}
+        style={{ width: "60px", height: "60px", objectFit: "contain" }}
+        className="rounded"
+      />
+      <div className="flex-grow-1 ms-3">
+        <strong className="d-block text-truncate" style={{ maxWidth: "180px" }}>
+          {product.title}
+        </strong>
+        <small className="text-muted">${product.price.toFixed(2)}</small>
+      </div>
+
+      <div className="d-flex align-items-center gap-2">
+        <span className="fw-bold px-3">Qty : {item.quantity}</span>
+      </div>
+    </div>
+  );
+};
+
+export default function Checkout() {
+  const { items, clearCart} = useCart();
+  const { products } = useFetchData("https://fakestoreapi.com/products");
+
+  // Match cart items with full product data
+  const cartWithProducts = items
+    .map((cartItem) => {
+      const product = products.find((p) => p.id === Number(cartItem.sku));
+      return product ? { cartItem, product } : null;
+    })
+    .filter(Boolean);
+
+  // Calculations
+  const subtotal = cartWithProducts
+    .reduce((sum, { cartItem, product }) => sum + product.price * cartItem.quantity, 0)
+    .toFixed(2);
+
+  const shipping = items.length > 0 ? 2.0 : 0;
+  const total = (parseFloat(subtotal) + shipping).toFixed(2);
+
+  const isCartEmpty = items.length === 0;
+
+  return (
+    <main className="container my-5">
+      <h2 className="mb-4 fw-bold text-center text-primary">Checkout</h2>
+
+      {isCartEmpty ? (
+        <div className="alert alert-info text-center">
+          Your cart is empty. <Link to="/">Continue shopping</Link>.
+        </div>
+      ) : (
+        <div className="row" id="checkout-content">
+          {/* === LEFT: Forms === */}
+          <div className="col-lg-8">
+            {/* Shipping Information */}
+            <div className="card mb-4 shadow-sm">
+              <div className="card-body p-4">
+                <h4 className="card-title mb-4 fw-bold">Shipping Information</h4>
+                <form id="shipping-form">
+                  <div className="mb-3">
+                    <label htmlFor="fullName" className="form-label">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="fullName"
+                      placeholder="John Doe"
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="address" className="form-label">
+                      Address
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="address"
+                      placeholder="123 Main St, Phnom Penh"
+                      required
+                    />
+                  </div>
+                  <div className="row">
+                    <div className="col-md-6 mb-3">
+                      <label htmlFor="city" className="form-label">
+                        City
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="city"
+                        placeholder="Phnom Penh"
+                        required
+                      />
                     </div>
-                     {/* Order Summary  */}
-                    <div className="col-lg-4">
-                        <div className="card">
-                            <div className="card-body">
-                                <h4 className="card-title">Order Summary</h4>
-                                <table className="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Item</th>
-                                            <th>Price</th>
-                                            <th>Qty</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="order-summary"></tbody>
-                                </table>
-                                <div className="text-end">
-                                    <h5>Subtotal: $<span id="subtotal">0.00</span></h5>
-                                    <h5>Shipping: $<span id="shipping">5.00</span></h5>
-                                    <h4>Total: $<span id="order-total">0.00</span></h4>
-                                    <button className="btn btn-primary w-100" id="place-order-btn" disabled>Place Order</button>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="col-md-6 mb-3">
+                      <label htmlFor="phoneNumber" className="form-label">
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        className="form-control"
+                        id="phoneNumber"
+                        placeholder="+855 12 345 678"
+                        required
+                      />
                     </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            {/* Payment Information */}
+            <div className="card mb-4 shadow-sm">
+              <div className="card-body p-4">
+                <h4 className="card-title mb-4 fw-bold text-primary">
+                  Payment Information
+                </h4>
+                <form id="payment-form">
+                  <div className="bg-light rounded-3 p-4">
+                    {/* Cash on Delivery */}
+                    <div className="form-check p-3 bg-white rounded shadow-sm d-flex align-items-center mb-3">
+                      <input
+                        className="form-check-input me-3"
+                        type="radio"
+                        name="paymentMethod"
+                        id="payDelivery"
+                        defaultChecked
+                      />
+                      <label className="form-check-label fw-medium" htmlFor="payDelivery">
+                        Cash on Delivery
+                      </label>
+                    </div>
+
+                    {/* QR Payment */}
+                    <div className="form-check p-3 bg-white rounded shadow-sm d-flex align-items-center">
+                      <input
+                        className="form-check-input me-3"
+                        type="radio"
+                        name="paymentMethod"
+                        id="payQR"
+                      />
+                      <label
+                        className="form-check-label fw-medium d-flex align-items-center"
+                        htmlFor="payQR"
+                      >
+                        Pay with KHQR or ABA
+                        <span className="ms-3 d-flex gap-2">
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/b/bb/KHQR_Logo.png"
+                            alt="KHQR"
+                            style={{ width: "48px", height: "48px", objectFit: "contain" }}
+                            className="border rounded p-1 bg-white shadow-sm"
+                          />
+                          <img
+                            src="https://play-lh.googleusercontent.com/WU6sZMD1UspzwqYnlACtmN60rckp8hoINSgsR21mKLJBbsHPwXtzwvOocpjC7FcO1g"
+                            alt="ABA"
+                            style={{ width: "48px", height: "48px", objectFit: "contain" }}
+                            className="border rounded p-1 bg-white shadow-sm"
+                          />
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          {/* === RIGHT: Order Summary === */}
+          <div className="col-lg-4">
+            <div className="card shadow-sm sticky-top" style={{ top: "1rem" }}>
+              <div className="card-body">
+                <h4 className="card-title mb-4">Order Summary</h4>
+
+                {/* Cart Items */}
+                <div className="mb-4">
+                  {cartWithProducts.map(({ cartItem, product }) => (
+                    <CartLineItem
+                      key={cartItem.sku}
+                      item={cartItem}
+                      product={product}
+                    />
+                  ))}
                 </div>
-            </main>
-        </>
-    )
+
+                <hr />
+
+                <div className="text-end">
+                  <p className="mb-1">
+                    <strong>Subtotal:</strong> ${subtotal}
+                  </p>
+                  <p className="mb-1">
+                    <strong>Shipping:</strong> ${shipping.toFixed(2)}
+                  </p>
+                  <h4 className="text-primary">
+                    <strong>Total: ${total}</strong>
+                  </h4>
+
+                  <button
+                    className="btn btn-success w-100 mt-3"
+                    id="place-order-btn"
+                    disabled={isCartEmpty}
+                    onClick={() => {
+                      alert("Order placed! (Demo)");
+                      clearCart();
+                    }}
+                  >
+                    Place Order
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </main>
+  );
 }
-
-export default Checkout

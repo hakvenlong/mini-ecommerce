@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import Shop from '../page/Shop'; 
 import logo from "../assets/logo.png"
 
 function Navbar() {
