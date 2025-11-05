@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function ProductDetail() {
+  function addToCard (){
+    alert("product added") 
+  }
+
+
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -43,7 +48,7 @@ function ProductDetail() {
           <p className="text-success fw-bold">${product.price}</p>
           <p>{product.description}</p>
           <p>Rating: {product.rating.rate}</p>
-          <button className="btn btn-primary">Add to Cart</button>
+          <button onClick={addToCard} className="btn btn-primary">Add to Cart</button>
         </div>
       </div>
     </div>

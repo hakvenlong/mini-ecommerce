@@ -1,34 +1,76 @@
+// src/pages/Cart.jsx
+import React from "react";
+import { useCart } from "use-cart";
+import useFetchData from "../hook/useFetchData";
 
-function Cart() {
-    return (
+const CartLineItem = ({ item, product }) => {
+  const { addItem, removeItem, removeLineItem } = useCart();
+
+  return (
+    <div className="d-flex align-items-center justify-content-between p-2 border rounded mb-2">
+      <div>
+        <strong>{product.title}</strong> ${product.price}
+      </div>
+
+      <div className="d-flex align-items-center gap-2">
+        <button className="btn btn-sm btn-outline-danger" onClick={() => removeItem(item.sku)}>
+          –
+        </button>
+        <span>{item.quantity}</span>
+        <button className="btn btn-sm btn-outline-success" onClick={() => addItem(item.sku)}>
+          +
+        </button>
+        <button className="btn btn-sm btn-danger" onClick={() => removeLineItem(item.sku)}>
+          X
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default function Cart() {
+  const { items, clearCart, lineItemsCount } = useCart();
+  const { products } = useFetchData("https://fakestoreapi.com/products");
+
+  // Map cart items → full product objects
+  const cartWithProducts = items
+    .map((cartItem) => {
+      const product = products.find((p) => p.id === Number(cartItem.sku));
+      return product ? { cartItem, product } : null;
+    })
+    .filter(Boolean);
+
+  const total = cartWithProducts
+    .reduce((sum, { cartItem, product }) => sum + product.price * cartItem.quantity, 0)
+    .toFixed(2);
+
+  return (
+    <div className="container py-5">
+      <h1 className="mb-4">Cart ({lineItemsCount})</h1>
+
+      {items.length === 0 ? (
+        <p className="alert alert-info text-center">Your cart is empty.</p>
+      ) : (
         <>
-            <main className="container my-5">
-                <h2 className="mb-4">Shopping Cart</h2>
-                <div className="table-responsive custom-table-responsive">
-                    <table className="cart-table table table-bordered">
-                        <thead>
-                            <tr className="table-primary">
-                                <th>Item</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cart-items">
-                        </tbody>
-                    </table>
-                </div>
-                <div id="empty-cart-message" className="alert alert-info text-center" style={{}}>
-                    Your cart is empty. <a href="./shop.html">Continue shopping</a>.
-                </div>
-                <div className="cart-summary text-end mt-4">
-                    <h3>Total: $<span id="cart-total">0.00</span></h3>
-                    <a href="./checkout.html" className="btn btn-primary" id="checkout-btn" disabled>Proceed to Checkout</a>
-                </div>
-            </main>
-        </>
-    )
-}
+          {cartWithProducts.map(({ cartItem, product }) => (
+            <CartLineItem key={cartItem.sku} item={cartItem} product={product} />
+          ))}
 
-export default Cart
+          <hr />
+          <div className="d-flex justify-content-between align-items-center">
+            <button className="btn btn-outline-danger" onClick={clearCart}>
+              Clear Cart
+            </button>
+
+            <div>
+              <strong>Total: ${total}</strong>
+              <button className="btn btn-primary ms-3" onClick={() => console.log(items)}>
+                Checkout
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}

@@ -1,22 +1,16 @@
-import React, { useState } from 'react';
-import useFetchData from '../hook/useFetchData';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useCart } from "use-cart";
+import useFetchData from "../hook/useFetchData";
 
-import "../App.css";   // keep your custom styles if any
+export default function Products() {
+  const { addItem } = useCart();
+  const { products, loading, error } = useFetchData("https://fakestoreapi.com/products");
 
-function Products() {
-  // ---------- Cart & Wishlist ----------
-  const [cart, setCart] = useState([]);
-
-  const addToCart = (product) => {
-    setCart((prev) => [...prev, product]);
+  const handleAdd = (product) => {
+    addItem(String(product.id)); // sku = product.id as string
     alert(`${product.title} added to cart!`);
   };
-
-  // ---------- Data ----------
-  const { products, loading, error } = useFetchData(
-    "https://fakestoreapi.com/products"
-  );
 
   if (loading)
     return (
@@ -54,17 +48,20 @@ function Products() {
                   ${product.price}
                 </p>
                 <p>
-                  rating {product.rating.rate} | instock {product.rating.count}
+                  Rating: {product.rating.rate} | In stock: {product.rating.count}
                 </p>
 
                 <div className="mt-auto d-flex gap-2">
                   <button
-                    onClick={() => addToCart(product)}
-                    className="btn btn-danger flex-fill"
+                    type="button" class="btn btn-primary" id="liveToastBtn"
+                    onClick={() => handleAdd(product)}
                   >
                     Add to Cart
                   </button>
-                  <Link to={`/productdetail/${product.id}`} className="btn btn-outline-secondary flex-fill">
+                  <Link
+                    to={`/productdetail/${product.id}`}
+                    className="btn btn-outline-secondary flex-fill"
+                  >
                     More Detail
                   </Link>
                 </div>
@@ -76,5 +73,3 @@ function Products() {
     </div>
   );
 }
-
-export default Products;

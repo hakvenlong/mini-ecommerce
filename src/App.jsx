@@ -1,4 +1,4 @@
-// src/App.jsx
+import { CartProvider, useCart } from "use-cart"
 import React from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -13,25 +13,28 @@ import LoginAcc from './page/LoginAcc';
 import Error from './page/Error';
 import ProductDetail from './page/ProductDetail';
 
-
 function App() {
-  
+
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/login" element={<LoginAcc />} />
-        <Route path="/productdetail/:id" element={<ProductDetail />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <CartProvider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/login" element={<LoginAcc />} />
+          <Route path="/productdetail/:id" element={<ProductDetail />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+        <Footer />
+      </Router>
+      
+    </CartProvider>
+    
   );
 }
 
