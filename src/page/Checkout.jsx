@@ -3,9 +3,7 @@ import { useCart } from "use-cart";
 import { Link } from "react-router-dom";
 import useFetchData from "../hook/useFetchData";
 
-const CartLineItem = ({ item, product }) => {
-  const { addItem, removeItem } = useCart();
-
+const CartLineItem = ({ item, product }) => { 
   return (
     <div className="d-flex align-items-center justify-content-between p-3 border rounded mb-2 bg-light">
       <img

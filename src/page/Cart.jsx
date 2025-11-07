@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useCart } from "use-cart";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import useFetchData from "../hook/useFetchData";
 
 const CartLineItem = ({ item, product }) => {
@@ -9,19 +9,25 @@ const CartLineItem = ({ item, product }) => {
   return (
     <div className="d-flex align-items-center justify-content-between p-2 border rounded mb-2">
       <img style={{width:'50px'}} src={product.image} alt="" />
-      <div>
-        <strong>{product.title}</strong> ${product.price}
+      <div className="flex-grow-1 ms-3">
+        <strong className="d-block text-truncate" style={{ maxWidth: "180px" }}>
+          {product.title}
+        </strong>
+        <small className="text-muted">${product.price.toFixed(2)} x {item.quantity}</small>
       </div>
 
       <div className="d-flex align-items-center gap-2">
-        <button className="btn btn-sm btn-outline-danger" onClick={() => removeItem(item.sku)}>
+        <button className="btn btn-sm btn-outline-secondary" onClick={() => removeItem(item.sku)}>
           –
         </button>
-        <span>{item.quantity}</span>
-        <button className="btn btn-sm btn-outline-success" onClick={() => addItem(item.sku)}>
+        <span className="fw-bold">{item.quantity}</span>
+        <button className="btn btn-sm btn-outline-secondary" onClick={() => addItem(item.sku)}>
           +
         </button>
-        <button className="btn btn-sm btn-danger" onClick={() => removeLineItem(item.sku)}>
+        <button
+          className="btn btn-sm btn-outline-danger ms-2"
+          onClick={() => removeLineItem(item.sku)}
+        >
           X
         </button>
       </div>
@@ -30,6 +36,9 @@ const CartLineItem = ({ item, product }) => {
 };
 
 export default function Cart() {
+
+  
+
   const { items, clearCart, lineItemsCount } = useCart();
   const { products } = useFetchData("https://fakestoreapi.com/products");
 

@@ -8,7 +8,7 @@ export default function Products() {
   const { products, loading, error } = useFetchData("https://fakestoreapi.com/products");
 
   const handleAdd = (product) => {
-    addItem(String(product.id)); // sku = product.id as string
+    addItem(String(product.id)); 
     alert(`${product.title} added to cart!`);
   };
 

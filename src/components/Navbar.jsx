@@ -1,8 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../assets/logo.png"
+import { useCart } from "use-cart";
+import useFetchData from "../hook/useFetchData";
+import Badge from 'react-bootstrap/Badge';
+import Button from 'react-bootstrap/Button';
 
 function Navbar() {
+  const { items, lineItemsCount } = useCart();
+    const { products } = useFetchData("https://fakestoreapi.com/products");
+  
+    const cartWithProducts = items
+      .map((cartItem) => {
+        const product = products.find((p) => p.id === Number(cartItem.sku));
+        return product ? { cartItem, product } : null;
+      })
+      .filter(Boolean);
+  
+    const total = cartWithProducts
+      .reduce((sum, { cartItem, product }) => sum + product.price * cartItem.quantity, 0)
+      .toFixed(2);
   return (
     <>
       <header className="navbar navbar-expand-lg navbar-light sticky-top bg-white shadow-sm">
@@ -71,13 +88,8 @@ function Navbar() {
           {/* Right-aligned icon links */}
           <ul className="navbar-nav ms-auto right-nav">
             <li className="nav-item">
-              <Link className="nav-link" to="/account">
-                <i className="bi bi-person"></i> Account
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/cart">
-                <i className="bi bi-cart"></i> Cart
+              <Link className="nav-link position-relative" to="/cart">
+                <i className="bi bi-cart"></i> Cart  <Badge bg="danger">{lineItemsCount}</Badge>
               </Link>
             </li>
             <li className="nav-item">

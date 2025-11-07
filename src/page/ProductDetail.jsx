@@ -1,37 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { useParams , Link } from "react-router-dom";
+import React from "react";
+import { Link, useParams } from "react-router-dom";
+import { useCart } from "use-cart";
+import useFetchData from "../hook/useFetchData";
 
 function ProductDetail() {
-  function addToCard (){
-    alert("product added") 
-  }
+    const { addItem } = useCart();
+    const { id } = useParams(); 
 
-
-  const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const res = await fetch(`https://fakestoreapi.com/products/${id}`);
-        if (!res.ok) throw new Error("Failed to fetch product");
-        const data = await res.json();
-        setProduct(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+    const { products, loading, error } = useFetchData("https://fakestoreapi.com/products");
+  
+    const handleAdd = (product) => {
+      addItem(String(product.id)); // sku = product.id as string
+      alert(`${product.title} added to cart!`);
     };
+  
+    if (loading)
+      return (
+        <div className="text-center py-5">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      );
+  
+    if (error)
+      return (
+        <div className="alert alert-danger text-center" role="alert">
+          Error: {error}
+        </div>
+      );
 
-    fetchProduct();
-  }, [id]);
+    // Find the product based on the ID from the URL
+    const product = products.find((p) => p.id === Number(id));
 
-  if (loading) return <div className="text-center py-5">Loading...</div>;
-  if (error) return <div className="alert alert-danger text-center">{error}</div>;
-  if (!product) return <h2 className="text-center mt-5">Product not found</h2>;
+    if (!product) {
+        return <div className="container py-5 text-center">Product not found.</div>;
+    }
 
   return (
     <div className="container py-5">
@@ -40,18 +44,19 @@ function ProductDetail() {
           <img
             src={product.image}
             alt={product.title}
-            style={{ maxHeight: "400px", objectFit: "contain" }}
+            className="img-fluid" // Make image responsive
+            style={{ maxHeight: "400px", objectFit: "contain", width: "100%" }}
           />
         </div>
         <div className="col-md-6">
-          <h2>{product.title}</h2>
-          <p className="text-success fw-bold">${product.price}</p>
-          <p>{product.description}</p>
-          <p>Rating: {product.rating.rate}</p>
-          <button onClick={addToCard} className="btn btn-primary">Add to Cart</button>
+          <h2 className="mb-3">{product.title}</h2>
+          <p className="text-success fw-bold fs-4 mb-3">${product.price}</p>
+          <p className="mb-4">{product.description}</p>
+          <p className="mb-4"><strong>Rating:</strong> {product.rating.rate} ({product.rating.count} reviews)</p>
+          <button onClick={() => handleAdd(product)} className="btn btn-primary btn-lg me-3">Add to Cart</button>
+          <Link to="/shop" className="btn btn-outline-secondary btn-lg">Back to Shop</Link>
         </div>
       </div>
-      <Link to="/shop" className="btn btn-danger">Back to Shop</Link>
     </div>
   );
 }
