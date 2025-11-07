@@ -2,7 +2,7 @@
 
 A modern, responsive **React shopping cart** application built with:
 
-- **React 18** + **React Router**
+- **React ** + **React Router**
 - **use-cart** – lightweight cart state management
 - **Fake Store API** – product data
 - **Bootstrap 5** – styling & responsiveness
@@ -46,18 +46,31 @@ A modern, responsive **React shopping cart** application built with:
 ## Project Structure
 src/
 ├── components/
+
 │   └── CartLineItem.jsx
+
 ├── pages/
+
 │   ├── Products.jsx
+
 │   ├── Cart.jsx
+
 │   └── Checkout.jsx
+
 ├── hook/
+
 │   └── useFetchData.js
+
 ├── context/
+
 │   └── CartContext.jsx   (optional – if not using use-cart)
+
 ├── App.jsx
+
 ├── index.jsx
+
 └── README.md
+
 text
 
 
@@ -68,17 +81,18 @@ text
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/yourusername/react-ecommerce.git
-cd react-ecommerce
+```git clone [https://github.com/yourusername/react-ecommerce.git](https://github.com/hakvenlong/mini-ecommerce.git)```
 
-npm install
+```cd react-ecommerce```
 
-npm install react-router-dom bootstrap react-bootstrap use-cart
+```npm install```
 
-npm start
+```npm install react-router-dom bootstrap react-bootstrap use-cart```
+
+```npm start```
 
 License
-MIT © [Hak Venlong]
+MIT © Hak Venlong
 
 Support
 Found a bug? Want a feature?
