@@ -42,35 +42,23 @@ A modern, responsive **React shopping cart** application built with:
 | Fake Store API    | Mock product data                |
 
 ---
-
+```
 ## Project Structure
 src/
 ├── components/
-
 │   └── CartLineItem.jsx
-
 ├── pages/
-
 │   ├── Products.jsx
-
 │   ├── Cart.jsx
-
 │   └── Checkout.jsx
-
 ├── hook/
-
 │   └── useFetchData.js
-
 ├── context/
-
 │   └── CartContext.jsx   (optional – if not using use-cart)
-
 ├── App.jsx
-
 ├── index.jsx
-
 └── README.md
-
+```
 text
 
 
@@ -80,8 +68,8 @@ text
 
 ### 1. Clone the repo
 
-```bash
-```git clone [https://github.com/yourusername/react-ecommerce.git](https://github.com/hakvenlong/mini-ecommerce.git)```
+bash
+```git clone https://github.com/hakvenlong/mini-ecommerce.git)```
 
 ```cd react-ecommerce```
 
