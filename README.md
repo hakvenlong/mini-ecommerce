@@ -85,3 +85,6 @@ MIT © Hak Venlong
 Support
 Found a bug? Want a feature?
 Open an issue
+
+
+<img width="1460" height="833" alt="screenshot" src="https://github.com/user-attachments/assets/4bc945ea-7033-4532-a3aa-1487d5662304" />
