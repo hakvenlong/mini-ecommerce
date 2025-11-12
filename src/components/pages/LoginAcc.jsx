@@ -1,5 +1,4 @@
 
-
 function Login() {
     return (
         <>
@@ -22,7 +21,7 @@ function Login() {
                                     <label className="form-check-label" htmlFor="rememberMe">Remember Me</label>
                                 </div>
                                 <button type="submit" className="btn btn-primary w-100 mb-3">Login</button>
-                                <p className="text-center mb-0">Don't have an account? <a href="./register.html" className="text-decoration-none">Register here</a></p>
+                                <p className="text-center mb-0">Don't have an account? <a href="./register" className="text-decoration-none">Register here</a></p>
                                 <p className="text-center mt-2"><a href="./forgot-password.html" className="text-decoration-none">Forgot Password?</a></p>
                             </div>
                         </div>

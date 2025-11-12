@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useCart } from "use-cart";
 import { Link } from "react-router-dom";
-import useFetchData from "../hook/useFetchData";
+import useFetchData from "../../hook/useFetchData";
 
 const CartLineItem = ({ item, product }) => {
   const { addItem, removeItem, removeLineItem } = useCart();

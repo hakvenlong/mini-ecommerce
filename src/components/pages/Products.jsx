@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useCart } from "use-cart";
-import useFetchData from "../hook/useFetchData";
+import useFetchData from "../../hook/useFetchData";
+import { ToastContainer, toast } from 'react-toastify';
+import Button from 'react-bootstrap/Button';
+import { FaCartPlus , FaInfoCircle   } from "react-icons/fa";
 
 export default function Products() {
+
+  const [ product, setProducts] = useState(()=>{
+    const saveCount = localStorage.getItem('myCount');
+    return saveCount ? JSON.parse(saveCount) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('myCount', JSON.stringify(product));
+  });
+
   const { addItem } = useCart();
   const { products, loading, error } = useFetchData("https://fakestoreapi.com/products");
 
   const handleAdd = (product) => {
-    addItem(String(product.id)); 
-    alert(`${product.title} added to cart!`);
+    addItem(String(product.id));
+    toast(`${product.title} added to cart!`);
   };
 
   if (loading)
@@ -52,17 +65,15 @@ export default function Products() {
                 </p>
 
                 <div className="mt-auto d-flex gap-2">
-                  <button
-                    type="button" class="btn btn-primary" id="liveToastBtn"
+                  <Button variant="outline-warning" id="liveToastBtn"
                     onClick={() => handleAdd(product)}
                   >
-                    Add to Cart
-                  </button>
+                    Add to Cart <FaCartPlus />
+                  </Button>
                   <Link
                     to={`/productdetail/${product.id}`}
-                    className="btn btn-outline-secondary flex-fill"
                   >
-                    More Detail
+                    <Button variant="outline-success">More Detail <FaInfoCircle /></Button>
                   </Link>
                 </div>
               </div>
@@ -70,6 +81,7 @@ export default function Products() {
           </div>
         ))}
       </div>
+      <ToastContainer />
     </div>
   );
 }
