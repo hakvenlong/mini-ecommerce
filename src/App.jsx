@@ -12,6 +12,7 @@ import LoginAcc from './components/pages/LoginAcc';
 import Error from './components/pages/Error';
 import ProductDetail from './components/pages/ProductDetail';
 import Register from './components/pages/Register';
+import { ToastContainer} from "react-toastify";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/productdetail/:id" element={<ProductDetail />} />
           <Route path="*" element={<Error />} />
         </Routes>
+        <ToastContainer />
         <Footer />
       </Router>
       

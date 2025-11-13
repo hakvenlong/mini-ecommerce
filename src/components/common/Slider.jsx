@@ -1,7 +1,7 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import Placeholder from 'react-bootstrap/Placeholder';   // <-- added
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 
 const sliderDesc = [
   {
@@ -49,40 +49,45 @@ function Slider() {
                     className={`carousel-item ${i === 0 ? "active" : ""}`}
                   >
                     <div className="row align-items-center">
-                      {/* Text */}
-                      <div className="col-sm-6" data-aos="fade-right">
+                      {/* Text Content */}
+                      <div className="col-lg-6 order-2 order-lg-1">
                         <Card className="border-0 bg-transparent">
-                          <Card.Body className="p-4">
-                            <Card.Title as="h2" className="display-5 fw-bold">
-                              <span className="text-primary">You Got This</span>
+                          <Card.Body className="p-4 p-lg-5">
+                            <h1 className="display-5 fw-bold mb-3">
+                              <span style={{ color: "var(--color-primary)" }}>You Got This</span>
+                            </h1>
+                            <Card.Title as="h3" className="h2 mb-3" style={{ color: "var(--color-primary)" }}>
+                              {slide.title}
                             </Card.Title>
-                            <Card.Title as="h3" className="mt-3">{slide.title}</Card.Title>
-                            <Card.Text className="lead">{slide.desc}</Card.Text>
+                            <Card.Text className="lead mb-4" style={{ color: "var(--color-muted)" }}>
+                              {slide.desc}
+                            </Card.Text>
 
-                            {/* Real button (swap with Placeholder.Button if you need a skeleton) */}
-                            <Button variant="primary" size="lg" className="mt-3">
-                              Get it now
-                            </Button>
-
-                            {/* Example of a placeholder button (uncomment if needed) */}
-                            {/* <Placeholder.Button variant="primary" size="lg" className="mt-3">
-                              Get it now
-                            </Placeholder.Button> */}
+                            <Link to={slide.link}>
+                              <Button
+                                variant="primary"
+                                size="lg"
+                                className="px-5 py-3 shadow-sm d-inline-flex align-items-center gap-2"
+                                style={{
+                                  backgroundColor: "var(--color-primary)",
+                                  borderColor: "var(--color-primary)",
+                                  fontWeight: "600",
+                                }}
+                              >
+                                Buy now
+                              </Button>
+                            </Link>
                           </Card.Body>
                         </Card>
                       </div>
 
                       {/* Images */}
-                      <div className="col-sm-6 position-relative" data-aos="fade-left">
+                      <div className="col-sm-6 ">
                         <img
                           src={slide.image}
-                          className="img-fluid girl"
+                          className="img-fluid"
                           alt={slide.altImage}
                           loading="lazy"
-                          style={{
-                            borderRadius: "15px",
-                            boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-                          }}
                         />
                         <img
                           src={slide.subImage}

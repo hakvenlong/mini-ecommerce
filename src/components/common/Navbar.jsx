@@ -29,7 +29,7 @@ function Navbar() {
               src={logo}
               alt="Logo"
               className="img-fluid"
-              style={{ height: '50px' }} // Fixed: object syntax
+              style={{ height: '50px'}} // Fixed: object syntax
             />
           </Link>
 
@@ -82,28 +82,34 @@ function Navbar() {
           </div>
         </div>
       </header>
-      <div className="navbar navbar-expand mb-4 bg-light">
-        <div className="container">
-          {/* Right-aligned icon links */}
-          <ul className="navbar-nav ms-auto right-nav">
-            <li className="nav-item">
-              <Link className="nav-link position-relative" to="/cart">
-                <i className="bi bi-cart"></i> Cart  <Badge bg="danger">{lineItemsCount}</Badge>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/checkout">
-                <i className="bi bi-bag-check"></i> Checkout
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link active" to="/login">
-                <i className="bi bi-lock"></i> Login
-              </Link>
-            </li>
-          </ul>
-        </div>
+      <div className="navbar navbar-expand bg-light">
+      <div className="container">
+        {/* Right-aligned navigation */}
+        <ul className="navbar-nav ms-auto">
+          <li className="nav-item">
+            <Link className="nav-link position-relative d-flex align-items-center gap-1" to="/cart">
+              <i className="bi bi-cart"></i>
+              Cart
+              <Badge bg="danger" pill className="ms-1">
+                {lineItemsCount}
+              </Badge>
+            </Link>
+          </li> 
+          <li className="nav-item">
+            <Link className="nav-link d-flex align-items-center gap-1" to="/checkout">
+              <i className="bi bi-bag-check"></i>
+              Checkout
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link d-flex align-items-center gap-1" to="/login">
+              <i className="bi bi-lock"></i>
+              Login
+            </Link>
+          </li>
+        </ul>
       </div>
+    </div>
     </>
   );
 }

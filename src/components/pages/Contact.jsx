@@ -35,13 +35,13 @@ const Contact = () => {
       .sendForm(SERVICE_ID, TEMPLATE_ID, formEl)
       .then(
         (result) => {
-          console.log('EmailJS SUCCESS:', result.status, result.text);
-          setStatus('Thank you! Your message has been sent successfully.');
+          // console.log('EmailJS SUCCESS:', result.status, result.text);
+          toast('Thank you! Your message has been sent successfully.');
           formEl.reset();
           setValidated(false);
         },
         (error) => {
-          console.error('EmailJS ERROR:', error);
+          // console.error('EmailJS ERROR:', error);
           const errMsg = error.text || error.message || 'Unknown error';
           const errCode = error.status ? ` (${error.status})` : '';
           toast.error(`Failed to send: ${errMsg}${errCode}. Please try again.`);
@@ -164,7 +164,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   className="btn btn-primary px-5"
-                  style={{ backgroundColor: '#FE980F', borderColor: '#FE980F' }}
+                  style={{ backgroundColor: '#5a189a', borderColor: '#5a189a' }}
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -196,19 +196,19 @@ const Contact = () => {
           {/* Contact Info */}
           <div className="col-12 col-md-6 mt-5 mt-md-0">
             <div className="row">
-              <div className="col-12 col-md-6 mb-4">
+              <div className="col-12 col-md-6 mb-4" style={{color:'#5a189a'}}>
                 <h5 className="fw-bold">Contact Information</h5>
                 <p className="small text-muted mb-2">
-                  <i className="bi bi-geo-alt-fill text-primary me-2"></i>
+                  <i className="bi bi-geo-alt-fill text-primary me-2" style={{color:'#5a189a'}}></i>
                   SMOS store No. 86A, Street 110,<br />
                   Russian Federation Blvd (110), Phnom Penh
                 </p>
                 <p className="small text-muted mb-2">
-                  <i className="bi bi-telephone-fill text-primary me-2"></i>
+                  <i className="bi bi-telephone-fill text-primary me-2" style={{color:'#5a189a'}}></i>
                   +855 123 456 789
                 </p>
                 <p className="small text-muted mb-2">
-                  <i className="bi bi-envelope-fill text-primary me-2"></i>
+                  <i className="bi bi-envelope-fill text-primary me-2" style={{color:'#5a189a'}}></i>
                   info@smosstore.com
                 </p>
               </div>
@@ -216,10 +216,9 @@ const Contact = () => {
               <div className="col-12 col-md-6 mb-4">
                 <h5 className="fw-bold">Follow Us</h5>
                 <div className="d-flex gap-3">
-                  <a href="https://web.facebook.com/" target="_blank" className="text-dark" aria-label="Facebook"><i className="bi bi-facebook fs-4"></i></a>
-                  <a href="https://x.com/" target="_blank" className="text-dark" aria-label="Twitter"><i className="bi bi-twitter fs-4"></i></a>
-                  <a href="https://www.instagram.com/" target="_blank" className="text-dark" aria-label="Instagram"><i className="bi bi-instagram fs-4"></i></a>
-                  <a href="https://www.linkedin.com/" target="_blank" className="text-dark" aria-label="LinkedIn"><i className="bi bi-linkedin fs-4"></i></a>
+                  <a href="https://web.facebook.com/" target="_blank" className="text-dark" aria-label="Facebook"><i className="bi bi-facebook fs-4" style={{color:'#5a189a'}}></i></a>
+                  <a href="https://x.com/" target="_blank" className="text-dark" aria-label="Twitter"><i className="bi bi-twitter fs-4" style={{color:'#5a189a'}}></i></a>
+                  <a href="https://www.instagram.com/" target="_blank" className="text-dark" aria-label="Instagram"><i className="bi bi-instagram fs-4" style={{color:'#5a189a'}}></i></a>
                 </div>
               </div>
             </div>
