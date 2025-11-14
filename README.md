@@ -1,4 +1,4 @@
-# React E-Commerce Store
+<img width="1920" height="3471" alt="image" src="https://github.com/user-attachments/assets/fc44cd71-0f22-4faf-bccc-cc347ef028eb" /># React E-Commerce Store
 
 A modern, responsive **React shopping cart** application built with:
 
@@ -86,5 +86,5 @@ Support
 Found a bug? Want a feature?
 Open an issue
 
+<img width="1920" height="3471" alt="screencapture-localhost-5173-2025-11-14-09_40_10" src="https://github.com/user-attachments/assets/18dbf09c-0663-4d2e-b67c-be9474b4871d" />
 
-<img width="1460" height="833" alt="screenshot" src="https://github.com/user-attachments/assets/4bc945ea-7033-4532-a3aa-1487d5662304" />
