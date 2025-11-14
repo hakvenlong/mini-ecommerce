@@ -1,4 +1,3 @@
-<img width="1920" height="3471" alt="image" src="https://github.com/user-attachments/assets/fc44cd71-0f22-4faf-bccc-cc347ef028eb" /># React E-Commerce Store
 
 A modern, responsive **React shopping cart** application built with:
 
